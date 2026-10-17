@@ -11,6 +11,8 @@ import {
 import Dashboard from "./pages/Dashboard";
 import analytics from "./analytics/analytics";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const menuItems = [
   { id: 1, name: "Paneer Tikka", price: 249, category: "Starter" },
   { id: 2, name: "Veg Biryani", price: 199, category: "Main Course" },
@@ -25,7 +27,8 @@ function PageTracker() {
 
   useEffect(() => {
     analytics.init({
-      apiUrl: "http://localhost:5000"
+      // apiUrl: "http://localhost:5000"
+      apiUrl: API_URL
     });
 
     if (lastPath.current !== location.pathname) {
@@ -124,7 +127,7 @@ async function handleCheckout() {
   try {
     const { visitorId, sessionId } = analytics.getContext();
 
-    const response = await fetch("http://localhost:5000/api/orders", {
+    const response = await fetch(`${API_URL}/api/orders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

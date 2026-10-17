@@ -11,7 +11,9 @@ import {
 } from "recharts";
 import "./Dashboard.css";
 
-const API_URL = "http://localhost:5000/api/analytics";
+let API_URL = import.meta.env.VITE_API_URL;
+
+API_URL = `${API_URL}/api/analytics`;
 
 function formatDate(date) {
   return date.toISOString().slice(0, 10);
